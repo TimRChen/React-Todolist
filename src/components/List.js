@@ -8,10 +8,15 @@ export default class List extends React.PureComponent {
     }
 
     render() {
+        let list = this.props.list;
         return (
             <div className="list">
                 <ul>
-                    <TodoItem value={this.props.value}/>
+                    {
+                        list.map(item => {
+                            return <TodoItem  key={Math.random()} value={item}/>;
+                        })
+                    }
                 </ul>
             </div>
         );

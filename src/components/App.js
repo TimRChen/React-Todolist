@@ -11,15 +11,16 @@ export default class App extends React.PureComponent {
         // super 子类继承父类this对象
         super(props);
         this.state = {
-            value: ''
+            list: []
         };
+        this.getTodoText = this.getTodoText.bind(this);
     }
 
-    getValue(value) {
-        this.setState({
-            value: value
-        });
-        console.log(value);
+    getTodoText(list) {
+        this.setState(prevState => ({
+            list: prevState.list.concat(list)
+        }));
+        console.log(this.state.list);
     }
 
     render() {
@@ -27,9 +28,9 @@ export default class App extends React.PureComponent {
             <div className="panel">
                 <h2 id="title">React-Todos</h2>
                 <Input
-                    getValue={this.getValue.bind(this)}
+                    getTodoText={this.getTodoText}
                 />
-                <List value={this.state.value}/>
+                <List list={this.state.list}/>
             </div>
         );
     }

@@ -7,7 +7,7 @@ export default class TodoItem extends React.PureComponent {
 
     render() {
         return (
-            <li key={Math.random()*10000}>{this.props.value}</li>
+            <li>{this.props.value}</li>
         );
     }
 }
