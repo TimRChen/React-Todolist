@@ -6,8 +6,11 @@ export default class TodoItem extends React.PureComponent {
     }
 
     render() {
+        let value = this.props.value;
         return (
-            <li>{this.props.value}</li>
+            <li>
+                <input type="checkbox" value={value} />{value}
+            </li>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.css';
+import './App.css';
 
 import Input from './Input';
 import List from './List';
@@ -20,17 +20,18 @@ export default class App extends React.PureComponent {
         this.setState(prevState => ({
             list: prevState.list.concat(list)
         }));
-        console.log(this.state.list);
     }
 
     render() {
         return (
             <div className="panel">
                 <h2 id="title">React-Todos</h2>
-                <Input
-                    getTodoText={this.getTodoText}
-                />
-                <List list={this.state.list}/>
+                <div className="container">
+                    <Input
+                        getTodoText={this.getTodoText}
+                    />
+                    <List list={this.state.list}/>
+                </div>
             </div>
         );
     }
