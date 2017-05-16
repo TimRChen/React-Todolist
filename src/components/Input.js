@@ -10,13 +10,17 @@ export default class Input extends React.PureComponent {
 
     handleClick(e) {
         e.preventDefault();
-        this.props.getValue('something...');
+        this.props.getValue(this.refs.textInput.value);
     }
 
     render() {
         return (
             <div className="input-container">
-                <input className="input" placeholder="what's your task?"></input>
+                <input
+                    autoFocus="true"
+                    className="input"
+                    placeholder="what's your task?"
+                    ref="textInput" />
                 <button className="submit"
                         type="submit"
                         onClick={this.handleClick.bind(this)}

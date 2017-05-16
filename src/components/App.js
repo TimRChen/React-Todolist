@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './App.css';
+
 import Input from './Input';
 import List from './List';
-import styles from './App.css';
 
 
 //  extends 继承React.PureComponent 所有属性和方法
@@ -23,9 +24,11 @@ export default class App extends React.PureComponent {
 
     render() {
         return (
-            <div className="todolist">
+            <div className="panel">
                 <h2 id="title">React-Todos</h2>
-                <Input getValue={this.getValue.bind(this)}/>
+                <Input
+                    getValue={this.getValue.bind(this)}
+                />
                 <List value={this.state.value}/>
             </div>
         );
