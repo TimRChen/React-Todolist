@@ -4,6 +4,10 @@
     list-style: none;
 }
 
+button {
+    cursor: pointer;
+}
+
 .panel {
     max-width: 600px;
     margin-right: auto;
@@ -44,6 +48,10 @@
     border-radius: 8px;
 }
 
+.input-container .submit:hover {
+    background: #e2e2e2;
+}
+
 .list {
     margin: 2% 5% 0 5%;
 }
@@ -51,4 +59,17 @@
 .list ul li {
     border-bottom: 1px solid #e2e2e2;
     margin-bottom: 10px;
+}
+
+.list ul li button {
+    float: right;
+    width: 12%;
+    height: 26px;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+}
+.list ul li button:hover {
+    background: red;
+    color: #fff;
 }
