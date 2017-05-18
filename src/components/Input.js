@@ -19,9 +19,7 @@ export default class Input extends React.PureComponent {
     handleSubmit(e) {
         e.preventDefault();
         this.props.getTodoText(this.state.text);
-        this.setState({
-            text: ''
-        });
+        this.setState({text: ''});
     }
 
     render() {

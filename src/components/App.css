@@ -56,6 +56,20 @@ button {
     margin: 2% 5% 0 5%;
 }
 
+.list .control .clear {
+    float: right;
+    width: 15%;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+}
+
+.list .control .clear:hover {
+    background: #99cc33;
+    color: #fff;
+}
+
 .list ul li {
     border-bottom: 1px solid #e2e2e2;
     margin-bottom: 10px;
