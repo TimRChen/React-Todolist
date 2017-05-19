@@ -9,6 +9,9 @@
 
 ### 0.0.4 v
 *   删除任务功能`closed`
+*   全选功能`closed`
+*   清除已完成功能`continue`
+*   单选功能与全选功能逻辑层面产生冲突`continue`
 
 ### 0.0.4 bug
 *   this.setState 出现bug:

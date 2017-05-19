@@ -13,9 +13,34 @@ export default class App extends React.PureComponent {
         super(props);
         this.getTodoText = this.getTodoText.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.changeTodoState = this.changeTodoState.bind(this);
         this.state = {
-            list: []
+            list: [],
+            isAllChecked: false
         };
+    }
+
+    changeTodoState(index, isDone, isChangeAll=false) {
+        // 给每个项绑定isDone属性
+        if (isChangeAll) {
+            let list = update(this.state.list, {$apply: item => {
+                item.isDone = isDone;
+                return item;
+            }});
+            this.setState({
+                list: list,
+                isAllChecked: isDone
+            });
+        } else {
+            console.log(this.state.list);
+            // let index = update(this.state, {
+            //     list: extend(this.state.list, )
+            // });
+            // this.setState({
+            //     list: this.state.list[index]
+            // });
+            debugger
+        }
     }
 
     getTodoText(text) {
@@ -25,10 +50,19 @@ export default class App extends React.PureComponent {
     }
 
     handleDelete(index) {
-        let list = update(this.state.list, {$splice: [[index, 1]]});
-        this.setState({
-            list: list
-        });
+        if (typeof(index) === 'number') {
+            let list = update(this.state.list, {$splice: [[index, 1]]});
+            this.setState({
+                list: list
+            });
+        } else {
+            if (!this.state.isAllChecked) {
+                let list = update(this.state.list, {$splice: [[0, this.state.list.length]]});
+                this.setState({
+                    list: list
+                });
+            }
+        }
     }
 
     render() {
@@ -41,7 +75,8 @@ export default class App extends React.PureComponent {
                     />
                     <List 
                         list={this.state.list}
-                        handleDelete={this.handleDelete} />
+                        handleDelete={this.handleDelete}
+                        changeTodoState={this.changeTodoState} />
                 </div>
             </div>
         );

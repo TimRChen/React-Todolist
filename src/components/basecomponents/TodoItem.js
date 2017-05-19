@@ -5,12 +5,10 @@ export default class TodoItem extends React.PureComponent {
         super(props);
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
-        this.handleSelect = this.handleSelect.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
             isDone: this.props.isDone,
-            textStyles: {},
-            // isClosed: 0,
             btnStyles: {'display': 'none'},
         };
     }
@@ -27,28 +25,24 @@ export default class TodoItem extends React.PureComponent {
         });
     }
 
-    handleSelect() {
-        const textStyles = !this.state.isDone ? {'textDecoration': 'line-through'} : {};
-        this.setState({
-            isDone: !this.state.isDone,
-            textStyles: textStyles,
-        });
-    }
-
     handleDelete() {
         this.props.handleDelete(this.props.index);
     }
 
-    render() {
+    handleSelect() {
+        let isDone = !this.state.isDone;
+        this.props.changeTodoState(this.props.index, isDone);
+    }
 
-        let value = this.props.value;
+    render() {
+        let textStyles = this.props.isDone ? {'textDecoration': 'line-through'} : {};
         return (
             <li onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
                 <input
                     type="checkbox"
-                    checked={this.state.isDone}
+                    checked={this.props.isDone}
                     onChange={this.handleSelect} />
-                <span style={this.state.textStyles}>  {value}</span>
+                <span style={textStyles}>  {this.props.value}</span>
                 <button style={this.state.btnStyles} onClick={this.handleDelete}>delete</button>
             </li>
         );
