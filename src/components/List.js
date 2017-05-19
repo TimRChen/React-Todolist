@@ -11,7 +11,8 @@ export default class List extends React.PureComponent {
         };
     }
 
-    handleSelectAll() {
+    handleSelectAll(e) {
+        this.props.changeTodoState(null, e.target.checked, true);
         this.setState({
             isDone: !this.state.isDone
         });

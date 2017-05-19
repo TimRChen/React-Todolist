@@ -21,25 +21,13 @@ export default class App extends React.PureComponent {
     }
 
     changeTodoState(index, isDone, isChangeAll=false) {
-        // 给每个项绑定isDone属性
         if (isChangeAll) {
-            let list = update(this.state.list, {$apply: item => {
-                item.isDone = isDone;
-                return item;
-            }});
+            
             this.setState({
-                list: list,
                 isAllChecked: isDone
             });
         } else {
-            console.log(this.state.list);
-            // let index = update(this.state, {
-            //     list: extend(this.state.list, )
-            // });
-            // this.setState({
-            //     list: this.state.list[index]
-            // });
-            debugger
+
         }
     }
 
@@ -56,7 +44,7 @@ export default class App extends React.PureComponent {
                 list: list
             });
         } else {
-            if (!this.state.isAllChecked) {
+            if (this.state.isAllChecked) {
                 let list = update(this.state.list, {$splice: [[0, this.state.list.length]]});
                 this.setState({
                     list: list

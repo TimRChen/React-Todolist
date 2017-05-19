@@ -30,8 +30,7 @@ export default class TodoItem extends React.PureComponent {
     }
 
     handleSelect() {
-        let isDone = !this.state.isDone;
-        this.props.changeTodoState(this.props.index, isDone);
+        this.props.changeTodoState(this.props.index, !this.state.isDone);
     }
 
     render() {
