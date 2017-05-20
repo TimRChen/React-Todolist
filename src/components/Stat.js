@@ -16,7 +16,7 @@ export default class Stat extends React.PureComponent {
                     onChange={this.props.handleSelectAll}
                     checked={this.props.isAllChecked}
                         />  {closed} closed / {list.length}
-                <button className="clear" onClick={this.props.handleDelete}>清除已完成</button>
+                <button className="clear" onClick={this.props.clearDone}>清除已完成</button>
             </div>
         );
     }

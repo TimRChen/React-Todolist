@@ -13,6 +13,7 @@ export default class App extends React.PureComponent {
     constructor(props) {
         // super 子类继承父类this对象
         super(props);
+        this.clearDone = this.clearDone.bind(this);
         this.getTodoText = this.getTodoText.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleSelectAll=this.handleSelectAll.bind(this);
@@ -56,33 +57,25 @@ export default class App extends React.PureComponent {
     }
 
     handleDelete(index) {
-        let length = _.cloneDeep(this.state.list);
-        if (length.filter(item => item.isChecked).length === 1) {
-            let list = update(this.state.list, {$splice: [[this.state.index, 1]]});
+        let list = update(this.state.list, {$splice: [[this.state.index, 1]]});
+        this.setState({
+            list: list
+        });
+    }
+
+    clearDone() {
+        let judge = _.cloneDeep(this.state.list);
+        if (this.state.isAllChecked) {
+            let list = update(this.state.list, {$splice: [[0, this.state.list.length]]});
+            this.setState({
+                list: list,
+                isAllChecked: false
+            });
+        } else if (judge.filter(item => item.isChecked).length >= 1) {
+            let list = judge.filter(item => !item.isChecked);
             this.setState({
                 list: list
             });
-        } else {
-            // debugger
-            if (this.state.isAllChecked) {
-                let list = update(this.state.list, {$splice: [[0, this.state.list.length]]});
-                this.setState({
-                    list: list,
-                    isAllChecked: false
-                });
-            } else if (length.filter(item => item.isChecked).length > 1) {
-                // debugger
-                let list = _.cloneDeep(this.state.list);
-                list.filter(item => {
-                    if (item.isChecked !== true) {
-                        return item;
-                    }
-                });
-                // debugger
-                this.setState({
-                    list: list
-                });
-            }
         }
     }
 
@@ -101,7 +94,7 @@ export default class App extends React.PureComponent {
                     <Stat
                         list={this.state.list}
                         isAllChecked={this.state.isAllChecked}
-                        handleDelete={this.handleDelete}
+                        clearDone={this.clearDone}
                         handleSelectAll={this.handleSelectAll} />
                 </div>
             </div>

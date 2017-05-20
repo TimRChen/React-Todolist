@@ -1,5 +1,16 @@
 ## TodoList by React
 *  this is a todolist. by @TimRChen
+![喜欢可以Follow一下](https://raw.githubusercontent.com/TimRChen/photoRepo/master/React-Item/2017_05.gif)
+
+## 功能
+
+*   可以在最上面的input里，使用回车来添加任务
+*   在中间的任务列表里，由checkbox来控制任务的状态
+*   已完成的任务有一个line-through的样式
+*   当鼠标移到每一个任务时，都会出现删除按钮提供删除
+*   在底部有一个全选按钮，用于控制所有的任务状态
+*   还有已完成与总数的显示
+*   可以清空已完成的任务
 
 ## how to start
     npm install .
@@ -8,9 +19,10 @@
 ## version
 
 ### 0.0.5 v
+*   **实现整个Todolist功能**
 *   解决复选框单选与全选冲突问题`closed`
 *   分离底部统计组件`closed`
-*   实现清除已完成功能`continue`
+*   实现清除已完成功能`closed`
 
 ### 0.0.4 v
 *   删除任务功能`closed`
