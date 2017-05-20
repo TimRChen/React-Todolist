@@ -5,17 +5,6 @@ import TodoItem from './basecomponents/TodoItem';
 export default class List extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.handleSelectAll = this.handleSelectAll.bind(this);
-        this.state = {
-            isDone: false,
-        };
-    }
-
-    handleSelectAll(e) {
-        this.props.changeTodoState(null, e.target.checked, true);
-        this.setState({
-            isDone: !this.state.isDone
-        });
     }
 
     render() {
@@ -28,16 +17,10 @@ export default class List extends React.PureComponent {
                                     key={index}
                                     value={item}
                                     index={index}
-                                    isDone={this.state.isDone}
                                     handleDelete={this.props.handleDelete}
-                                    changeTodoState={this.props.changeTodoState}
-                                     />;
+                                    changeTodoState={this.props.changeTodoState} />;
                     })}
                 </ul>
-                <span className="control">
-                    <input className="selectAll" type="checkbox" onChange={this.handleSelectAll} checked={this.state.isDone} />  {this.state.isClosed || 0} closed / {list.length}
-                    <button className="clear" onClick={this.props.handleDelete}>清除已完成</button>
-                </span>
             </div>
         );
     }

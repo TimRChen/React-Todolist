@@ -6,20 +6,31 @@ export default class Input extends React.PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            text: ''
+            text: {
+                text: '',
+                isChecked: false
+            }
         };
     }
 
     handleChange(e) {
         this.setState({
-            text: e.target.value
+            text: {
+                text: e.target.value, 
+                isChecked: false
+            }
         });
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.getTodoText(this.state.text);
-        this.setState({text: ''});
+        this.setState({
+            text: {
+                text: '',
+                isChecked: false
+            }
+        });
     }
 
     render() {
@@ -27,7 +38,7 @@ export default class Input extends React.PureComponent {
             <div className="input-container">
                 <form onSubmit={this.handleSubmit}>
                     <input
-                        value={this.state.text}
+                        value={this.state.text.text}
                         onChange={this.handleChange}
                         autoFocus="true"
                         className="input"

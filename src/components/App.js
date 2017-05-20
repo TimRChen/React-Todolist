@@ -1,8 +1,10 @@
 import React from 'react';
 import update from 'immutability-helper';
+import _ from 'lodash';
 
 import Input from './Input';
 import List from './List';
+import Stat from './Stat';
 
 import './App.css';
 
@@ -13,21 +15,33 @@ export default class App extends React.PureComponent {
         super(props);
         this.getTodoText = this.getTodoText.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleSelectAll=this.handleSelectAll.bind(this);
         this.changeTodoState = this.changeTodoState.bind(this);
         this.state = {
             list: [],
-            isAllChecked: false
+            isAllChecked: false,
+            index: ''
         };
     }
 
-    changeTodoState(index, isDone, isChangeAll=false) {
+    changeTodoState(index, isChecked, isChangeAll=false) {
         if (isChangeAll) {
-            
+            let list = _.cloneDeep(this.state.list);
+            list.map(item => {
+                item.isChecked = isChecked;
+                return item;
+            });
             this.setState({
-                isAllChecked: isDone
+                list: list,
+                isAllChecked: isChecked
             });
         } else {
-
+            let list = _.cloneDeep(this.state.list);
+            list[index].isChecked = isChecked;
+            this.setState({
+                list: list,
+                index: index
+            });
         }
     }
 
@@ -37,15 +51,34 @@ export default class App extends React.PureComponent {
         }));
     }
 
+    handleSelectAll(e) {
+        this.changeTodoState(null, e.target.checked, true);
+    }
+
     handleDelete(index) {
-        if (typeof(index) === 'number') {
-            let list = update(this.state.list, {$splice: [[index, 1]]});
+        let length = _.cloneDeep(this.state.list);
+        if (length.filter(item => item.isChecked).length === 1) {
+            let list = update(this.state.list, {$splice: [[this.state.index, 1]]});
             this.setState({
                 list: list
             });
         } else {
+            // debugger
             if (this.state.isAllChecked) {
                 let list = update(this.state.list, {$splice: [[0, this.state.list.length]]});
+                this.setState({
+                    list: list,
+                    isAllChecked: false
+                });
+            } else if (length.filter(item => item.isChecked).length > 1) {
+                // debugger
+                let list = _.cloneDeep(this.state.list);
+                list.filter(item => {
+                    if (item.isChecked !== true) {
+                        return item;
+                    }
+                });
+                // debugger
                 this.setState({
                     list: list
                 });
@@ -65,6 +98,11 @@ export default class App extends React.PureComponent {
                         list={this.state.list}
                         handleDelete={this.handleDelete}
                         changeTodoState={this.changeTodoState} />
+                    <Stat
+                        list={this.state.list}
+                        isAllChecked={this.state.isAllChecked}
+                        handleDelete={this.handleDelete}
+                        handleSelectAll={this.handleSelectAll} />
                 </div>
             </div>
         );
