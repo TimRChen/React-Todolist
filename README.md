@@ -13,8 +13,12 @@
 *   可以清空已完成的任务
 
 ## how to start
-    npm install .
-    npm start
+```bash
+# install dependencies
+npm install
+# serve with hot reload at localhost:8080
+npm start
+```
 
 ## version
 
