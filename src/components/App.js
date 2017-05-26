@@ -57,7 +57,7 @@ export default class App extends React.PureComponent {
     }
 
     handleDelete(index) {
-        let list = update(this.state.list, {$splice: [[this.state.index, 1]]});
+        let list = update(this.state.list, {$splice: [[index, 1]]});
         this.setState({
             list: list
         });
