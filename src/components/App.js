@@ -39,6 +39,11 @@ export default class App extends React.PureComponent {
         } else {
             let list = _.cloneDeep(this.state.list);
             list[index].isChecked = isChecked;
+            if (isChecked === false) {
+                this.setState({
+                    isAllChecked: false
+                });
+            }
             this.setState({
                 list: list,
                 index: index
